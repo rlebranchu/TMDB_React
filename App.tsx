@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StatusBar, StyleSheet, View } from "react-native";
+import HomeScreen from "./src/views/home/home_screen";
+import {useFonts, Montserrat_200ExtraLight, Montserrat_400Regular, Montserrat_700Bold, Montserrat_900Black} from "@expo-google-fonts/montserrat";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const Styles = StyleSheet.create({
+  statusBarContainer: {
+    width: "100%",
+    height: 20,
+    backgroundColor: "black",
   },
 });
+
+export default function App() {
+  let [fontLoaded, error] = useFonts({
+    Montserrat_400Regular, Montserrat_700Bold, Montserrat_900Black
+  });
+
+  return (
+    <>
+      <HomeScreen />
+    </>
+  );
+}
