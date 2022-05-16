@@ -9,56 +9,46 @@ const HomeStyle = StyleSheet.create({
       ...Spacing.largePadding,
       flexDirection: 'column'
     },
+    titleContainer: {
+      flex: 2,
+      fontFamily: "Montserrat_900Black",
+      alignItems:'center',
+    },
     appTitle: {
       color: Colors.DARK_NORMALTEXT,
       fontSize: 40,
       fontWeight: 'bold',
     },
-    titleContainer: {
-      flex: 1,
-      fontFamily: "Montserrat_900Black",
-      alignItems:'center',
-    },
     searchContainer: {
       flex: 1,
-      alignItems:'center',
+      alignItems:'center'
     },
     listMovieContainer: {
-      flex: 1,
+      flex: 5,
+    },
+    listMovieItems:{
       alignItems:'center',
     },
     inputPromptContainer: {
       flex: 4,
     },
-    enterANumberText: {
-      color: Colors.PRIMARY,
-      fontSize: 24,
-      fontWeight: 'bold',
-    },
-    inputContainer: {
-      ...Spacing.marginVertical,
-      ...Spacing.padding,
+    searchText: {
+      margin: 30,
       backgroundColor: Colors.LIGHT,
-      color: "black",
+      color: Colors.LIGHT_NORMALTEXT,
       fontSize: 18,
-      borderRadius: 8,
+      borderRadius: 25,
       borderColor: "gray",
       width: "100%",
       borderWidth: 1,
       padding: 10,
+      fontFamily: 'Montserrat_400Regular'
     },
-    feedbackContainer: {
-      flexDirection: "row",
-      width: "100%",
+    topContainer: {
+      flex:1,
     },
-    feedbackButton: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    feebackButtonText: {
-      fontSize: 30,
-      fontWeight: "bold",
+    bottomContainer: {
+      flex:1,
     },
 });
 

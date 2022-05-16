@@ -13,7 +13,7 @@ const Styles = StyleSheet.create({
 
 export default function App() {
   let [fontLoaded, error] = useFonts({
-    Montserrat_400Regular, Montserrat_700Bold, Montserrat_900Black
+    Montserrat_200ExtraLight, Montserrat_400Regular, Montserrat_700Bold, Montserrat_900Black
   });
 
   return (
