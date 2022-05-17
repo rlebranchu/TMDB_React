@@ -2,6 +2,8 @@ interface MovieItemProps {
     id: string;
     title: string;
     imageUrl: string;
+    voteAverage: number,
+    dateRelease: Date,
 }
 
 interface ListMovieItemProps {

@@ -6,11 +6,14 @@ const LoadingStyle = StyleSheet.create({
     container:{
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'rgb(21,21,21)',
+        backgroundColor: Colors.LIGHT,
     },
     loadingText: {
-        color: Colors.DARK_NORMALTEXT,
-        alignSelf: 'center'
+        marginTop: 25,
+        color: Colors.LIGHT_NORMALTEXT,
+        textAlign: 'center',
+        lineHeight: 25,
+        fontFamily: "Montserrat_500Medium"
     }
 });
 

@@ -4,51 +4,56 @@ import * as Spacing from "../../theme/spacing";
 
 const HomeStyle = StyleSheet.create({
     pageContainer: {
-      flex: 1,
-      backgroundColor: Colors.DARK,
+      width: Spacing.windowWidth,
+      height: Spacing.windowHeight,
+      backgroundColor: Colors.LIGHT,
       ...Spacing.largePadding,
       flexDirection: 'column'
     },
     titleContainer: {
-      flex: 2,
+      width: "100%",
+      height: Spacing.windowHeight*0.3,
       fontFamily: "Montserrat_900Black",
       alignItems:'center',
     },
+    imageTitle: {
+      marginTop: 25,
+      width: 125,
+      height: 125 
+    },
     appTitle: {
-      color: Colors.DARK_NORMALTEXT,
-      fontSize: 40,
+      color: Colors.LIGHT_NORMALTEXT,
+      fontSize: 25,
       fontWeight: 'bold',
     },
     searchContainer: {
-      flex: 1,
+      width: "100%",
+      marginBottom: 15,
       alignItems:'center'
     },
     listMovieContainer: {
-      flex: 5,
+      width: Spacing.windowWidth,
+      height: Spacing.windowHeight*0.7
     },
     listMovieItems:{
       alignItems:'center',
     },
-    inputPromptContainer: {
-      flex: 4,
-    },
     searchText: {
-      margin: 30,
+      shadowColor: Colors.DARK,
+      shadowOffset: { width: 1, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 10,
+      elevation: 10,
       backgroundColor: Colors.LIGHT,
       color: Colors.LIGHT_NORMALTEXT,
-      fontSize: 18,
+      fontSize: 14,
       borderRadius: 25,
-      borderColor: "gray",
+      borderColor: Colors.DARK,
       width: "100%",
       borderWidth: 1,
-      padding: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
       fontFamily: 'Montserrat_400Regular'
-    },
-    topContainer: {
-      flex:1,
-    },
-    bottomContainer: {
-      flex:1,
     },
 });
 

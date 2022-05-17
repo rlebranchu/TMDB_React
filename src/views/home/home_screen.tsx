@@ -12,24 +12,6 @@ import { fetchMovies } from "../../api/services";
 import Loading from "../../common/Loading/loading";
 import { MovieItemProps, TMBDMovie } from "../../types/interfaces";
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-    imageUrl: 'https://images.affiches-et-posters.com//albums/3/56170/affiche-film-joker.jpg',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-    imageUrl: 'https://images.affiches-et-posters.com//albums/3/56170/affiche-film-joker.jpg',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-    imageUrl: 'https://images.affiches-et-posters.com//albums/3/56170/affiche-film-joker.jpg',
-  },
-];
-
 const HomeScreen: React.FC = () => {
 
   const [listMovie, setListMovie] = useState([] as MovieItemProps[]);
@@ -37,6 +19,10 @@ const HomeScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    fetchMoviesBySearch();
+  }, [search]);
+
+  const fetchMoviesBySearch = () => {
     setLoading(true);
     fetchMovies(search).then((data: TMBDMovie[]) => {
       const listMovies: MovieItemProps[] = data.map((item: TMBDMovie) : MovieItemProps => {
@@ -44,6 +30,8 @@ const HomeScreen: React.FC = () => {
           id: item.id,
           title: item.title,
           imageUrl: item.poster_path,
+          voteAverage: item.vote_average,
+          dateRelease: new Date(item.release_date)
         };
         return movie;
       });
@@ -51,23 +39,12 @@ const HomeScreen: React.FC = () => {
       // set loading to false after movies are fetched.
       setLoading(false);
     });
-  }, [search]);
+  }
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <View style={HomeStyle.pageContainer}>
-      <View style={HomeStyle.titleContainer}>
-        <Image source={require('./../../../assets/icon.png')} style={{ width: 150, height: 150 }} /> 
-        <Text style={HomeStyle.appTitle}>TMBD React</Text>
-      </View>
-      <View style={HomeStyle.searchContainer}>
-        <TextInput
-              style={HomeStyle.searchText}
-              value={search}
-              onChangeText={(text) => setSearch(text)}
-              placeholder="Search a specific movie" />
-      </View>
+  const showLoadingOrListMovies = 
+    loading ? 
+      <Loading />
+    :
       <View style={HomeStyle.listMovieContainer}>
         <FlatList
           showsHorizontalScrollIndicator={false}
@@ -77,7 +54,22 @@ const HomeScreen: React.FC = () => {
           keyExtractor={item => item.id}
         />
       </View>
-      <View style={HomeStyle.bottomContainer}/>
+  ;
+
+  return (
+    <View style={HomeStyle.pageContainer}>
+      <View style={HomeStyle.titleContainer}>
+        <Image source={require('./../../../assets/adaptive-icon.png')} style={HomeStyle.imageTitle} /> 
+        <Text style={HomeStyle.appTitle}>TMBD React</Text>
+      </View>
+      <View style={HomeStyle.searchContainer}>
+        <TextInput
+              style={HomeStyle.searchText}
+              defaultValue={search}
+              onChangeText={(text) => setSearch(text)}
+              placeholder="Search a specific movie" />
+      </View>
+      {showLoadingOrListMovies} 
     </View>
   );
 };

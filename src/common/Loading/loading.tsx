@@ -1,13 +1,15 @@
 import { ActivityIndicator, Text, View } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import * as Colors from "../../theme/colors";
 import LoadingStyle from "./loading_style";
 
 const Loading = () => {
     return (
         <View style={LoadingStyle.container}>
-            <ActivityIndicator size="small" color={Colors.PRIMARY} />
+            <ActivityIndicator size="large" color={Colors.DARK} />
             <Text style={LoadingStyle.loadingText}>
-                Waiting please.. Eat your popcorn !
+                Waiting please..
+                {'\n'}
+                Go prepare your best popcorn !
             </Text>
         </View>
     );
