@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { MovieItemProps,TMBDMovie} from '../types/interfaces';
+import {TMBDMovie} from '../types/interfaces';
 
 import { URL, API_KEY } from './const';
 

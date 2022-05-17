@@ -1,4 +1,7 @@
-interface MovieItemProps {
+import { RouteProp, StackActionHelpers } from "@react-navigation/native";
+import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+
+interface MovieModel {
     id: string;
     title: string;
     imageUrl: string;
@@ -7,7 +10,8 @@ interface MovieItemProps {
 }
 
 interface ListMovieItemProps {
-    item : MovieItemProps
+    item : MovieModel,
+    onMoviePress: Function
 }
 
 interface TMBDMovie {
@@ -27,4 +31,12 @@ interface TMBDMovie {
     vote_count: number
 }
 
-export {MovieItemProps, ListMovieItemProps, TMBDMovie};
+//--> typs for Navigation
+type RootStackParamList = {
+    Home: undefined,
+    MovieDetails: { movie: MovieModel }
+}
+type HomeScreenProps=NativeStackScreenProps<RootStackParamList, 'Home'>;
+type MovieDetailsScreenProps=NativeStackScreenProps<RootStackParamList, 'MovieDetails'>;
+
+export {MovieModel, ListMovieItemProps, TMBDMovie, RootStackParamList, HomeScreenProps, MovieDetailsScreenProps};

@@ -17,7 +17,7 @@ const HomeStyle = StyleSheet.create({
       alignItems:'center',
     },
     imageTitle: {
-      marginTop: 25,
+      marginTop: 45,
       width: 125,
       height: 125 
     },

@@ -1,18 +1,22 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
   Text,
   Image,
   View,
+  TouchableOpacity,
 } from "react-native";
 import { TMBD_IMAGE_URL } from "../../api/const";
-import { MovieItemProps, ListMovieItemProps } from "../../types/interfaces";
+import { MovieModel, ListMovieItemProps } from "../../types/interfaces";
 import MovieItemStyle from "./movie_item_style";
 
-const ListMovieItem: React.FC<ListMovieItemProps> = ({item}) => (
-  <MovieItem id={item.id} title={item.title} imageUrl={item.imageUrl} voteAverage={item.voteAverage} dateRelease={item.dateRelease}/>
+const ListMovieItem: React.FC<ListMovieItemProps> = ({item, onMoviePress}) => (
+  <TouchableOpacity onPress={() => {onMoviePress()}}>
+    <MovieItem id={item.id} title={item.title} imageUrl={item.imageUrl} voteAverage={item.voteAverage} dateRelease={item.dateRelease} />
+  </TouchableOpacity>
 );
 
-const MovieItem: React.FC<MovieItemProps> =  ({id, title, imageUrl, voteAverage, dateRelease}) => {
+const MovieItem: React.FC<MovieModel> =  ({id, title, imageUrl, voteAverage, dateRelease}) => {
   return (
     <View style={MovieItemStyle.itemContainer}>
       <View style={MovieItemStyle.movieContainer}>

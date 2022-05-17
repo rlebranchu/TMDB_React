@@ -10,23 +10,23 @@ import HomeStyle from "./home_style";
 import MovieItem from "../../common/MovieItem/movie_item";
 import { fetchMovies } from "../../api/services";
 import Loading from "../../common/Loading/loading";
-import { MovieItemProps, TMBDMovie } from "../../types/interfaces";
+import { HomeScreenProps, MovieModel, TMBDMovie } from "../../types/interfaces";
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
-  const [listMovie, setListMovie] = useState([] as MovieItemProps[]);
+  const [listMovie, setListMovie] = useState([] as MovieModel[]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchMoviesBySearch();
+    _fetchMoviesBySearch();
   }, [search]);
 
-  const fetchMoviesBySearch = () => {
+  const _fetchMoviesBySearch = () => {
     setLoading(true);
     fetchMovies(search).then((data: TMBDMovie[]) => {
-      const listMovies: MovieItemProps[] = data.map((item: TMBDMovie) : MovieItemProps => {
-        const movie : MovieItemProps = {
+      const listMovies: MovieModel[] = data.map((item: TMBDMovie) : MovieModel => {
+        const movie : MovieModel = {
           id: item.id,
           title: item.title,
           imageUrl: item.poster_path,
@@ -41,6 +41,11 @@ const HomeScreen: React.FC = () => {
     });
   }
 
+  const _onMoviePress = (movie: MovieModel) => {
+    console.log('teststetste');
+    navigation.navigate('MovieDetails', { movie: movie });
+  }
+
   const showLoadingOrListMovies = 
     loading ? 
       <Loading />
@@ -50,7 +55,7 @@ const HomeScreen: React.FC = () => {
           showsHorizontalScrollIndicator={false}
           data={listMovie}
           horizontal
-          renderItem={MovieItem}
+          renderItem={({item}) => <MovieItem item={item} onMoviePress={() => _onMoviePress(item)}/>}
           keyExtractor={item => item.id}
         />
       </View>
