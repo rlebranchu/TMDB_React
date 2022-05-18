@@ -2,11 +2,11 @@ import { Dimensions, StyleSheet } from "react-native";
 import * as Colors from "../../theme/colors";
 import * as Spacing from "../../theme/spacing";
 
-const MOVIE_RATIO = Spacing.windowHeight*0.45;
+const MOVIE_RATIO = Spacing.screenHeight*0.45;
 
 const MovieItemStyle = StyleSheet.create({
     itemContainer: {
-        width: Spacing.windowWidth*0.75,
+        width: Spacing.screenWidth*0.75,
         height: MOVIE_RATIO
     },
     movieContainer: {
@@ -35,12 +35,12 @@ const MovieItemStyle = StyleSheet.create({
     movieTitle:{
         fontSize: 12,
         textAlign:'center',
-        fontFamily: 'Montserrat_700Bold',
+        fontWeight: '700',
     },
     movieSubtitle:{
         fontSize: 12,
         textAlign:'center',
-        fontFamily: 'Montserrat_500Medium',
+        fontWeight: '500',
     }
 });
 

@@ -10,13 +10,13 @@ import HomeStyle from "./home_style";
 import MovieItem from "../../common/MovieItem/movie_item";
 import { fetchMovies } from "../../api/services";
 import Loading from "../../common/Loading/loading";
-import { HomeScreenProps, MovieModel, TMBDMovie } from "../../types/interfaces";
+import { HomeScreenProps, TMDBMovieBase, TMDBMovieList } from "../../types/interfaces";
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
-  const [listMovie, setListMovie] = useState([] as MovieModel[]);
-  const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [listMovie, setListMovie] = useState<TMDBMovieBase[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     _fetchMoviesBySearch();
@@ -24,14 +24,14 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   const _fetchMoviesBySearch = () => {
     setLoading(true);
-    fetchMovies(search).then((data: TMBDMovie[]) => {
-      const listMovies: MovieModel[] = data.map((item: TMBDMovie) : MovieModel => {
-        const movie : MovieModel = {
+    fetchMovies(search).then((data: TMDBMovieList[]) => {
+      const listMovies: TMDBMovieBase[] = data.map((item: TMDBMovieList) : TMDBMovieBase => {
+        const movie : TMDBMovieBase = {
           id: item.id,
           title: item.title,
-          imageUrl: item.poster_path,
-          voteAverage: item.vote_average,
-          dateRelease: new Date(item.release_date)
+          poster_path: item.poster_path,
+          vote_average: item.vote_average,
+          release_date: new Date(item.release_date)
         };
         return movie;
       });
@@ -41,8 +41,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     });
   }
 
-  const _onMoviePress = (movie: MovieModel) => {
-    console.log('teststetste');
+  const _onMoviePress = (movie: TMDBMovieBase) => {
     navigation.navigate('MovieDetails', { movie: movie });
   }
 

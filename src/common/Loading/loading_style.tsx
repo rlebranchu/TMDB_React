@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
 import * as Colors from "../../theme/colors";
-import * as Spacing from "../../theme/spacing";
 
 const LoadingStyle = StyleSheet.create({
     container:{
@@ -13,7 +12,7 @@ const LoadingStyle = StyleSheet.create({
         color: Colors.LIGHT_NORMALTEXT,
         textAlign: 'center',
         lineHeight: 25,
-        fontFamily: "Montserrat_500Medium"
+        fontWeight: "500"
     }
 });
 

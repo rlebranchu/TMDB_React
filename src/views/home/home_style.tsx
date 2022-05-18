@@ -4,27 +4,25 @@ import * as Spacing from "../../theme/spacing";
 
 const HomeStyle = StyleSheet.create({
     pageContainer: {
-      width: Spacing.windowWidth,
-      height: Spacing.windowHeight,
-      backgroundColor: Colors.LIGHT,
-      ...Spacing.largePadding,
-      flexDirection: 'column'
+      width: Spacing.screenWidth,
+      height: Spacing.screenHeight,
+      ...Spacing.largePadding
     },
     titleContainer: {
       width: "100%",
-      height: Spacing.windowHeight*0.3,
-      fontFamily: "Montserrat_900Black",
+      height: Spacing.screenHeight*0.25,
+      fontWeight: "900",
       alignItems:'center',
     },
     imageTitle: {
       marginTop: 45,
-      width: 125,
-      height: 125 
+      width: 100,
+      height: 100 
     },
     appTitle: {
       color: Colors.LIGHT_NORMALTEXT,
       fontSize: 25,
-      fontWeight: 'bold',
+      fontWeight: '700',
     },
     searchContainer: {
       width: "100%",
@@ -32,8 +30,8 @@ const HomeStyle = StyleSheet.create({
       alignItems:'center'
     },
     listMovieContainer: {
-      width: Spacing.windowWidth,
-      height: Spacing.windowHeight*0.7
+      width: Spacing.screenWidth,
+      height: Spacing.screenHeight*0.7
     },
     listMovieItems:{
       alignItems:'center',
@@ -53,7 +51,7 @@ const HomeStyle = StyleSheet.create({
       borderWidth: 1,
       paddingHorizontal: 10,
       paddingVertical: 5,
-      fontFamily: 'Montserrat_400Regular'
+      fontWeight: '400'
     },
 });
 
