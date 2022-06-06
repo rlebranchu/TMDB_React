@@ -3,16 +3,20 @@ import { withSafeAreaInsets } from "react-native-safe-area-context";
 import * as Colors from "../../theme/colors";
 import * as Spacing from "../../theme/spacing";
 
+const POSTER_WIDTH = Spacing.screenWidth*0.45;
+const POSTER_HEIGHT = Spacing.screenHeight*0.3;
+
 const MovieDetailsStyle = StyleSheet.create({
     pageContainer: {
       width: Spacing.screenWidth,
       height: Spacing.screenHeight,
-      backgroundColor: Colors.LIGHT,
-      flexDirection: 'column'
+      backgroundColor: Colors.DARK,
+      flexDirection: 'column',
     },
     backdrop:{
       width: "100%",
       height: "100%",
+      backgroundColor: Colors.DARK
     },
     headerContainer:{
       flex:1,
@@ -24,13 +28,8 @@ const MovieDetailsStyle = StyleSheet.create({
       width: 40,
       height: 40,
       marginTop: 50,
-      backgroundColor:'#FFF',
+      backgroundColor: Colors.LIGHT,
       borderRadius:15,
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
     },
     returnIcon:{
       width:"50%",
@@ -39,36 +38,98 @@ const MovieDetailsStyle = StyleSheet.create({
     movieContainer:{
       ...Spacing.largeMargin,
       flex:50,
-      marginTop: (Spacing.screenWidth*0.45)/2 +50,
+      marginTop: POSTER_WIDTH/2 +50,
       alignItems:"center",
     },
-    posterContainer:{
-      position: 'absolute',
-      top:-(Spacing.screenWidth*0.45)/2,
-      borderRadius: 24,
-      borderWidth: 10,
+    movieTopContainer:{
+      height: POSTER_HEIGHT/2,
+      width:"100%",
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start'
+    },
+    leftPopularityContainer:{
+      flex:25,
+      height:"100%",
+      alignItems: "center",
+      justifyContent: 'center'
+    },
+    separatorText:{
+      fontColor: "#CCCCCC",
+      fontWeight: "600"
+    },
+    yearReleaseDateText:{
+      fontSize: 15,
+      fontWeight: "700"
+    },
+    dayMonthReleaseDateText:{},
+    hiddenByPosterContainer:{
+      width:POSTER_HEIGHT,
+    },
+    centerPosterContainer:{
+      flex:50,
+      height:"100%",
+    },
+    rightPopularityContainer:{
+      flex:25,
+      height:"100%",
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    starIcon:{
+      width:30,
+      height:30,
+      marginVertical: 10
+    },
+    youtubeIcon:{
+      width:30,
+      height:30
+    },
+    detailsContainer:{
       backgroundColor: Colors.LIGHT,
-      borderColor: Colors.LIGHT,
-      shadowColor: Colors.DARK,
+      alignItems: "center",      
+      borderRadius: 34,
+      width:"100%",
+      height: Spacing.screenHeight-250
+    },
+    posterContainer:{
+      position:"absolute",
+      top:-POSTER_HEIGHT/2,
+      borderRadius: 25,
+      borderWidth:10,
+      borderColor:Colors.LIGHT,
+      backgroundColor:Colors.LIGHT,
+      width: "100%",
+      height: POSTER_HEIGHT,
       shadowOffset: { width: 1, height: 2 },
       shadowOpacity: 0.8,
       shadowRadius: 10,
       elevation: 10,
     },
     posterImage:{
-      borderRadius: 24,
-      width: Spacing.screenWidth*0.45,
-      height: Spacing.screenHeight*0.3,
+      width:"100%",
+      height:"100%",
+      borderRadius: 25,
     },
-    detailsContainer:{
-      paddingTop: (Spacing.screenWidth*0.45)+20,
-      backgroundColor: Colors.LIGHT,
-      alignItems: "center",      
-      borderRadius: 34,
-      width:"100%"
+    descriptionContainer:{
+      paddingHorizontal:20
     },
     movieTitle:{
-      fontWeight: '700'
+      marginTop: 10,
+      fontWeight: '700',
+      fontSize:18,
+      textAlign:'center'
+    },
+    productionContainer:{
+      marginTop: 10,
+      height: 25
+    },
+    overviewContainer:{
+      marginTop: 20,
+      flex:1,
+    },
+    overviewText:{
+      textAlign:'justify'
     }
 });
 

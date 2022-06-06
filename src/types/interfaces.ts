@@ -22,7 +22,6 @@ type TMDBMovieList = TMDBMovieBase & {
     original_title:string,
     overview: string,
     popularity:number,
-    video: boolean,
     vote_count: number
 }
 
@@ -31,7 +30,7 @@ type MovieGenre = {
     name: string
 }
 
-type MovieCompany = {
+type MovieProductor = {
     id: string,
     logo_path: string,
     name: string,
@@ -44,11 +43,24 @@ type TMDBMovieData = TMDBMovieBase & {
     homepage: string,
     overview: string,
     popularity: number,
-    production_companies: MovieCompany[],
+    production_companies: MovieProductor[],
     revenue: number,
     status: string, 
-    video: boolean,
+    video: string,
     vote_count: number
+}
+
+type Video = {
+    iso_639_1: string,
+    iso_3166_1: string,
+    name: string,
+    key: string,
+    site: string,
+    size: number,
+    type: string,
+    official: boolean,
+    published_at: Date,
+    id: string
 }
 
 //--> typs for Navigation
@@ -59,4 +71,4 @@ type RootStackParamList = {
 type HomeScreenProps=NativeStackScreenProps<RootStackParamList, 'Home'>;
 type MovieDetailsScreenProps=NativeStackScreenProps<RootStackParamList, 'MovieDetails'>;
 
-export {TMDBMovieBase, ListMovieItemProps, TMDBMovieList, TMDBMovieData, RootStackParamList, HomeScreenProps, MovieDetailsScreenProps};
+export {TMDBMovieBase, ListMovieItemProps, TMDBMovieList, TMDBMovieData, MovieProductor, Video, RootStackParamList, HomeScreenProps, MovieDetailsScreenProps};

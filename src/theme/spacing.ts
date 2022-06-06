@@ -65,5 +65,5 @@ export const margin: ViewStyle = {
   margin: MARGIN,
 };
 export const largeMargin: ViewStyle = {
-  margin: MARGIN * 2,
+  margin: MARGIN * 4,
 };

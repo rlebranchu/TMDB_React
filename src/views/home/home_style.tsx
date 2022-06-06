@@ -3,11 +3,7 @@ import * as Colors from "../../theme/colors";
 import * as Spacing from "../../theme/spacing";
 
 const HomeStyle = StyleSheet.create({
-    pageContainer: {
-      width: Spacing.screenWidth,
-      height: Spacing.screenHeight,
-      ...Spacing.largePadding
-    },
+    pageContainer: {    },
     titleContainer: {
       width: "100%",
       height: Spacing.screenHeight*0.25,
@@ -27,7 +23,8 @@ const HomeStyle = StyleSheet.create({
     searchContainer: {
       width: "100%",
       marginBottom: 15,
-      alignItems:'center'
+      alignItems:'center',
+      paddingHorizontal:20
     },
     listMovieContainer: {
       width: Spacing.screenWidth,

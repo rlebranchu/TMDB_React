@@ -31,6 +31,7 @@ const MovieItemStyle = StyleSheet.create({
     },
     movieDescription:{
         height: 45,
+        ...Spacing.largeMarginHorizontal
     },
     movieTitle:{
         fontSize: 12,

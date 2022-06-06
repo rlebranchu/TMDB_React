@@ -54,6 +54,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           showsHorizontalScrollIndicator={false}
           data={listMovie}
           horizontal
+          contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
           renderItem={({item}) => <MovieItem item={item} onMoviePress={() => _onMoviePress(item)}/>}
           keyExtractor={item => item.id}
         />
