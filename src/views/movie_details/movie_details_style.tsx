@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { withSafeAreaInsets } from "react-native-safe-area-context";
 import * as Colors from "../../theme/colors";
 import * as Spacing from "../../theme/spacing";
 
@@ -30,6 +29,11 @@ const MovieDetailsStyle = StyleSheet.create({
       marginTop: 50,
       backgroundColor: Colors.LIGHT,
       borderRadius:15,
+      shadowColor: Colors.DARK,
+      shadowOffset: { width: 1, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 10,
+      elevation: 10,
     },
     returnIcon:{
       width:"50%",
@@ -55,8 +59,8 @@ const MovieDetailsStyle = StyleSheet.create({
       justifyContent: 'center'
     },
     separatorText:{
-      fontColor: "#CCCCCC",
-      fontWeight: "600"
+      color: "#888888",
+      fontWeight: "600",
     },
     yearReleaseDateText:{
       fontSize: 15,

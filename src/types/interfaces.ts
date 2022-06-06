@@ -1,5 +1,10 @@
-import { RouteProp, StackActionHelpers } from "@react-navigation/native";
-import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+type TMDBToken = {
+    token: string,
+    expires_at: Date,
+    session_id: string
+}
 
 type TMDBMovieBase = {
     id: string;
@@ -63,12 +68,30 @@ type Video = {
     id: string
 }
 
-//--> typs for Navigation
+//--> Types for Login
+type LoginError = {
+    error_code: number,
+    error_message: string
+}
+
+type LoginReturnType = LoginError | TMDBToken;
+
+const isLoginError = (obj: LoginReturnType): obj is LoginError  => {
+    if((obj as LoginError).error_code){
+        return true
+    }
+    return false
+}
+
+//--> types for Navigation
 type RootStackParamList = {
+    Login: undefined,
     Home: undefined,
     MovieDetails: { movie: TMDBMovieBase }
 }
+
+type LoginScreenProps=NativeStackScreenProps<RootStackParamList,'Login'>;
 type HomeScreenProps=NativeStackScreenProps<RootStackParamList, 'Home'>;
 type MovieDetailsScreenProps=NativeStackScreenProps<RootStackParamList, 'MovieDetails'>;
 
-export {TMDBMovieBase, ListMovieItemProps, TMDBMovieList, TMDBMovieData, MovieProductor, Video, RootStackParamList, HomeScreenProps, MovieDetailsScreenProps};
+export {TMDBToken, TMDBMovieBase, ListMovieItemProps, TMDBMovieList, TMDBMovieData, MovieProductor, Video, RootStackParamList, LoginScreenProps, HomeScreenProps, MovieDetailsScreenProps, LoginReturnType, LoginError, isLoginError};

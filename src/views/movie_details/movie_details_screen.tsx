@@ -15,15 +15,17 @@ import Loading from "../../common/Loading/loading";
 import ProductionItem from "../../common/ProductionItem/production_item";
 import { MovieDetailsScreenProps, TMDBMovieData } from "../../types/interfaces";
 import MovieDetailsStyle from "./movie_details_style";
+import { useGlobalState } from "../../../GlobalState";
 
 const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, route}) => {
 
   const [movie, setMovie] = useState<TMDBMovieData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const {state} = useGlobalState();
 
   useEffect(() => {
       setLoading(true);
-      fetchDatabyMovieID(route.params.movie.id).then((data: TMDBMovieData) => {
+      fetchDatabyMovieID(route.params.movie.id, state.session_id!).then((data: TMDBMovieData) => {
         setMovie(data);
         // set loading to false after movies are fetched.
         setLoading(false);
@@ -31,7 +33,7 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
   },[]);
 
   const _onPressReturn = () => {
-    navigation.navigate('Home');
+    navigation.goBack();
   }
 
   const _onPressYoutubeButton = () => {
@@ -78,7 +80,7 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
                       </TouchableOpacity>
                       : null 
                     }
-                    </View>
+                  </View>
                 </View>
                 <View style={MovieDetailsStyle.descriptionContainer}>
                   <Text style={MovieDetailsStyle.movieTitle}  numberOfLines={2}>{movie.title}</Text>

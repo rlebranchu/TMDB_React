@@ -1,10 +1,12 @@
-import React from "react";
-import HomeScreen from "./src/views/home/home_screen";
+import React, { useState } from "react";
 import {useFonts, Montserrat_200ExtraLight, Montserrat_400Regular, Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_900Black} from "@expo-google-fonts/montserrat";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from "./src/views/home/home_screen";
+import LoginScreen from "./src/views/login/login_screen";
 import MovieDetailsScreen from "./src/views/movie_details/movie_details_screen";
-import { RootStackParamList } from "./src/types/interfaces";
+import { RootStackParamList, TMDBToken } from "./src/types/interfaces";
+import { GlobalStateProvider } from "./GlobalState";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,15 +20,18 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator 
-        screenOptions={{
-          headerShown: false
-        }}
-        initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GlobalStateProvider>
+      <NavigationContainer>
+        <Stack.Navigator 
+          screenOptions={{
+            headerShown: false
+          }}
+          initialRouteName="Login">
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GlobalStateProvider>
   );
 }

@@ -5,18 +5,21 @@ import {
   Image,
   View,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import HomeStyle from "./home_style";
 import MovieItem from "../../common/MovieItem/movie_item";
-import { fetchMovies } from "../../api/services";
+import { fetchMovies, tryTMDBLogout } from "../../api/services";
 import Loading from "../../common/Loading/loading";
 import { HomeScreenProps, TMDBMovieBase, TMDBMovieList } from "../../types/interfaces";
+import { useGlobalState } from "../../../GlobalState";
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   const [listMovie, setListMovie] = useState<TMDBMovieBase[]>([]);
   const [search, setSearch] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const {state, setState} = useGlobalState();
 
   useEffect(() => {
     _fetchMoviesBySearch();
@@ -45,6 +48,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     navigation.navigate('MovieDetails', { movie: movie });
   }
 
+  const _onPressLogout = () => {
+    tryTMDBLogout(state.session_id!);
+    setState({token: '', expires_at: new Date(), session_id: '' });
+    navigation.goBack();
+  }
+
   const showLoadingOrListMovies = 
     loading ? 
       <Loading />
@@ -64,8 +73,16 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <View style={HomeStyle.pageContainer}>
       <View style={HomeStyle.titleContainer}>
-        <Image source={require('./../../../assets/adaptive-icon.png')} style={HomeStyle.imageTitle} /> 
-        <Text style={HomeStyle.appTitle}>TMBD React</Text>
+        <View style={HomeStyle.titleLeftContainer}></View>
+        <View style={HomeStyle.titleCenterContainer}>
+          <Image source={require('./../../../assets/adaptive-icon.png')} style={HomeStyle.imageTitle} /> 
+          <Text style={HomeStyle.appTitle}>TMDB React</Text>    
+        </View>
+        <View style={HomeStyle.titleRightContainer}>
+          <TouchableOpacity style={HomeStyle.logoutButton} onPress={_onPressLogout}>
+              <Image source={require('./../../../assets/logout.png')} style={HomeStyle.logoutIcon} />
+            </TouchableOpacity>
+        </View>
       </View>
       <View style={HomeStyle.searchContainer}>
         <TextInput
