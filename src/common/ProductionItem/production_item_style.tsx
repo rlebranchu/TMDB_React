@@ -1,8 +1,4 @@
 import { Dimensions, StyleSheet } from "react-native";
-import * as Colors from "../../theme/colors";
-import * as Spacing from "../../theme/spacing";
-
-const MOVIE_RATIO = Spacing.screenHeight*0.45;
 
 const MovieItemStyle = StyleSheet.create({
     productorName:{

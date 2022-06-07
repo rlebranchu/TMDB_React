@@ -1,12 +1,12 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import * as Colors from "../../theme/colors";
-import * as Spacing from "../../theme/spacing";
+import { GlobalStyle } from "../../theme/styles";
 
-const MOVIE_RATIO = Spacing.screenHeight*0.45;
+const MOVIE_RATIO = GlobalStyle.screenHeight*0.45;
 
 const MovieItemStyle = StyleSheet.create({
     itemContainer: {
-        width: Spacing.screenWidth*0.75,
+        width: GlobalStyle.screenWidth*0.75,
         height: MOVIE_RATIO
     },
     movieContainer: {
@@ -14,12 +14,8 @@ const MovieItemStyle = StyleSheet.create({
         padding: 15,
         alignItems: 'center',
         backgroundColor: Colors.LIGHT,
-        borderRadius: 34,
-        shadowColor: Colors.DARK,
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 10,
-        elevation: 10,
+        borderRadius: GlobalStyle.borderRadius,
+        ...GlobalStyle.shadow
     },
     posterImage:{
         width: '100%',
@@ -31,7 +27,6 @@ const MovieItemStyle = StyleSheet.create({
     },
     movieDescription:{
         height: 45,
-        ...Spacing.largeMarginHorizontal
     },
     movieTitle:{
         fontSize: 12,

@@ -1,16 +1,16 @@
 import { StyleSheet } from 'react-native';
 import * as Colors from '../../theme/colors';
-import * as Spacing from '../../theme/spacing';
+import { GlobalStyle } from '../../theme/styles';
 
-const POSTER_WIDTH = Spacing.screenWidth*0.45;
-const POSTER_HEIGHT = Spacing.screenHeight*0.3;
+const POSTER_HEIGHT = GlobalStyle.screenHeight*0.3;
 
 const MovieDetailsStyle = StyleSheet.create({
     pageContainer: {
-      width: Spacing.screenWidth,
-      height: Spacing.screenHeight,
+      width: GlobalStyle.screenWidth,
+      height: GlobalStyle.screenHeight,
       backgroundColor: Colors.DARK,
       flexDirection: 'column',
+      flex:1
     },
     backdrop:{
       width: '100%',
@@ -18,7 +18,7 @@ const MovieDetailsStyle = StyleSheet.create({
       backgroundColor: Colors.DARK
     },
     previousContainer:{
-      ...Spacing.largeMargin,
+      margin: GlobalStyle.spacingHorizontal
     },
     returnButton:{
       alignItems:'center',
@@ -28,11 +28,7 @@ const MovieDetailsStyle = StyleSheet.create({
       marginTop: 50,
       backgroundColor: Colors.LIGHT,
       borderRadius:15,
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow
     },
     returnIcon:{
       width:'50%',
@@ -40,20 +36,19 @@ const MovieDetailsStyle = StyleSheet.create({
     },
     movieContainer:{
       flex:1,
-      ...Spacing.largeMargin,
       alignItems:'center',
+      margin: GlobalStyle.spacingHorizontal
     },
     headerContainer:{
       width:'100%',
-      flex:4,
-      backgroundColor: Colors.LIGHT,
-      borderTopLeftRadius: 34,
-      borderTopRightRadius: 34,
+      flex:3,
+      borderTopLeftRadius: GlobalStyle.borderRadius,
+      borderTopRightRadius: GlobalStyle.borderRadius,
+      alignSelf: 'flex-start',
+      backgroundColor: Colors.LIGHT
     },
     headerTopContainer:{
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'flex-start',
+      flexDirection: 'row'
     },
     leftPopularityContainer:{
       flex:25,
@@ -98,10 +93,7 @@ const MovieDetailsStyle = StyleSheet.create({
       backgroundColor:Colors.LIGHT,
       width: '100%',
       height: POSTER_HEIGHT,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow
     },
     posterImage:{
       width:'100%',
@@ -109,24 +101,26 @@ const MovieDetailsStyle = StyleSheet.create({
       borderRadius: 25,
     },
     titleContainer:{
-      justifyContent: 'center'},
+      justifyContent: 'center'
+    },
     movieTitle:{
       fontWeight: '700',
       fontSize: 18,
       textAlign:'center',
-      paddingHorizontal: 20,
+      paddingHorizontal: GlobalStyle.spacingHorizontal,
       width: "100%",
     },
-    descriptionContainer:{},
+    descriptionContainer:{
+    },
     topDescriptionContainer:{
-      paddingHorizontal:20,
+      paddingHorizontal: GlobalStyle.spacingHorizontal,
     },
     detailsContainer:{
       flex:7,
       backgroundColor: Colors.LIGHT,
       alignItems: 'center',      
-      borderBottomLeftRadius: 34,
-      borderBottomRightRadius: 34,
+      borderBottomLeftRadius: GlobalStyle.borderRadius,
+      borderBottomRightRadius: GlobalStyle.borderRadius,
       width:'100%',
       overflow: 'hidden'
     },
@@ -135,7 +129,7 @@ const MovieDetailsStyle = StyleSheet.create({
       height: 25
     },
     overviewContainer:{
-      marginTop: 20,
+      marginTop: GlobalStyle.spacingHorizontal,
       flex:1,
     },
     overviewText:{

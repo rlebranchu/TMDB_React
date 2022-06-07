@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import * as Colors from '../../theme/colors';
+import { GlobalStyle } from '../../theme/styles';
 
 const HomeStyle = StyleSheet.create({
     pageContainer: { 
@@ -22,27 +23,18 @@ const HomeStyle = StyleSheet.create({
     },
     formContainer: {
         marginBottom: 15,
-        marginHorizontal:20,
+        marginHorizontal: GlobalStyle.spacingHorizontal,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: Colors.LIGHT,
         borderRadius:15,
-        shadowColor: Colors.DARK,
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 10,
-        elevation: 10,
-        padding: 20
-        
+        ...GlobalStyle.shadow,
+        padding: GlobalStyle.spacingHorizontal
     },
     inputText: {
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow,
       backgroundColor: Colors.LIGHT,
       color: Colors.LIGHT_NORMALTEXT,
       fontSize: 14,
@@ -57,11 +49,7 @@ const HomeStyle = StyleSheet.create({
       fontWeight: '400'
     },
     loginButton:{
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow,
       backgroundColor: Colors.DARK,
       color: Colors.LIGHT_NORMALTEXT,
       fontSize: 14,

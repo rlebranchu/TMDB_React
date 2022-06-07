@@ -1,14 +1,14 @@
 import { StyleSheet } from "react-native";
 import * as Colors from "../../theme/colors";
-import * as Spacing from "../../theme/spacing";
+import { GlobalStyle } from "../../theme/styles";
 
 const HomeStyle = StyleSheet.create({
     pageContainer: {},
     titleContainer: {
-      height: Spacing.screenHeight*0.25,
+      height: GlobalStyle.screenHeight*0.25,
       fontWeight: "900",
       flexDirection: 'row',
-      paddingHorizontal:20
+      paddingHorizontal: GlobalStyle.spacingHorizontal
     },
     titleLeftContainer:{
       flex: 2,
@@ -45,11 +45,7 @@ const HomeStyle = StyleSheet.create({
       marginTop: 50,
       backgroundColor: Colors.LIGHT,
       borderRadius:15,
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow
     },
     logoutIcon:{
       width:"50%",
@@ -59,21 +55,17 @@ const HomeStyle = StyleSheet.create({
       width: "100%",
       marginBottom: 15,
       alignItems:'center',
-      paddingHorizontal:20
+      paddingHorizontal: GlobalStyle.spacingHorizontal
     },
     listMovieContainer: {
-      width: Spacing.screenWidth,
-      height: Spacing.screenHeight*0.7
+      width: GlobalStyle.screenWidth,
+      height: GlobalStyle.screenHeight*0.7
     },
     listMovieItems:{
       alignItems:'center',
     },
     searchText: {
-      shadowColor: Colors.DARK,
-      shadowOffset: { width: 1, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 10,
-      elevation: 10,
+      ...GlobalStyle.shadow,
       backgroundColor: Colors.LIGHT,
       color: Colors.LIGHT_NORMALTEXT,
       fontSize: 14,

@@ -143,7 +143,6 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
                   : null }
                 </ScrollView>
               </View>
-              <View style={{flex:1}}/>
             </View>
         </ImageBackground>
       </View>
