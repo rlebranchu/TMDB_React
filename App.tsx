@@ -10,6 +10,11 @@ import { GlobalStateProvider } from "./GlobalState";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
+
 export default function App() {
   let [fontLoaded, error] = useFonts({
     Montserrat_200ExtraLight, Montserrat_400Regular, Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_900Black

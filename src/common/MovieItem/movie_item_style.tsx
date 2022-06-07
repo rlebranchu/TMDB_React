@@ -4,6 +4,7 @@ import { GlobalStyle } from "../../theme/styles";
 
 const MOVIE_RATIO = GlobalStyle.screenHeight*0.45;
 
+// Style of Little Movie Item 
 const MovieItemStyle = StyleSheet.create({
     itemContainer: {
         width: GlobalStyle.screenWidth*0.75,

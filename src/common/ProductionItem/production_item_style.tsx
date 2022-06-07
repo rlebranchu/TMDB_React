@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 
+// Style of Production Company Item
 const MovieItemStyle = StyleSheet.create({
     productorName:{
         borderWidth: 1,

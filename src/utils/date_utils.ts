@@ -4,6 +4,7 @@ interface Date {
     getMonthShortWord(): string;
 }
 
+// Get Three first letters of the month of date
 Date.prototype.getMonthShortWord = function () : string {
     return MONTHS[this.getMonth()];
 }

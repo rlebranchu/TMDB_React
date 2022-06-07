@@ -1,4 +1,3 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
   Text,
@@ -10,12 +9,14 @@ import { TMBD_IMAGE_URL } from "../../api/const";
 import { TMDBMovieBase, ListMovieItemProps } from "../../types/interfaces";
 import MovieItemStyle from "./movie_item_style";
 
+// Component to render touchable the SimilarMovieItem
 const ListMovieItem: React.FC<ListMovieItemProps> = ({item, onMoviePress}) => (
   <TouchableOpacity onPress={() => {onMoviePress()}}>
     <MovieItem id={item.id} title={item.title} poster_path={item.poster_path} vote_average={item.vote_average} release_date={item.release_date} />
   </TouchableOpacity>
 );
 
+// Little Component which present poster, title of the movie, its year and its note average
 const MovieItem: React.FC<TMDBMovieBase> =  ({id, title, poster_path, vote_average, release_date}) => {
   return (
     <View style={MovieItemStyle.itemContainer}>

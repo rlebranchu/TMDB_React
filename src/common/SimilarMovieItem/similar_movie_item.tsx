@@ -6,16 +6,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { TMBD_IMAGE_URL } from "../../api/const";
-import { TMDBMovieBase, ListMovieItemProps } from "../../types/interfaces";
+import { ListMovieItemProps } from "../../types/interfaces";
 import SimilarMovieItemStyle from "./similar_movie_item_style";
 
+// Component to render touchable the SimilarMovieItem
 const ListSimilarMovieMovieItem: React.FC<ListMovieItemProps> = ({item, onMoviePress}) => (
   <TouchableOpacity onPress={() => {onMoviePress()}}>
-    <SimilarMovieItem id={item.id} title={item.title} poster_path={item.poster_path} vote_average={item.vote_average} release_date={item.release_date} />
+    <SimilarMovieItem id={item.id} title={item.title} poster_path={item.poster_path} />
   </TouchableOpacity>
 );
 
-const SimilarMovieItem: React.FC<TMDBMovieBase> =  ({id, title, poster_path, vote_average, release_date}) => {
+// Little Component which present poster and title of the movie 
+const SimilarMovieItem: React.FC<{id: string, title: string, poster_path: string}> =  ({id, title, poster_path}) => {
   return (
     <View style={SimilarMovieItemStyle.itemContainer}>
       <View style={SimilarMovieItemStyle.movieContainer}>

@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native";
 import * as Colors from "../../theme/colors";
 import { GlobalStyle } from "../../theme/styles";
 
+/* Style of Home Page */
 const HomeStyle = StyleSheet.create({
     pageContainer: {},
     titleContainer: {

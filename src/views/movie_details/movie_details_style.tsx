@@ -4,6 +4,7 @@ import { GlobalStyle } from '../../theme/styles';
 
 const POSTER_HEIGHT = GlobalStyle.screenHeight*0.3;
 
+/* Style of Movie Details Page */
 const MovieDetailsStyle = StyleSheet.create({
     pageContainer: {
       width: GlobalStyle.screenWidth,

@@ -4,6 +4,7 @@ import { GlobalStyle } from "../../theme/styles";
 
 const MOVIE_RATIO = GlobalStyle.screenWidth*0.45;
 
+// Style of Little Movie Item 
 const SimilarMovieItemStyle = StyleSheet.create({
     itemContainer: {
         width: GlobalStyle.screenWidth*0.5,
@@ -17,7 +18,7 @@ const SimilarMovieItemStyle = StyleSheet.create({
         borderRadius: GlobalStyle.borderRadius,
         ...GlobalStyle.shadow
     },
-    posterImage:{
+    posterImage: {
         width: '100%',
         height: MOVIE_RATIO,
         resizeMode: 'cover',
@@ -25,7 +26,7 @@ const SimilarMovieItemStyle = StyleSheet.create({
         margin: 0,
         marginBottom: 10,
     },
-    movieDescription:{
+    movieDescription: {
         height: 30,
     },
     movieTitle:{

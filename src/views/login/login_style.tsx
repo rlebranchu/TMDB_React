@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 import * as Colors from '../../theme/colors';
 import { GlobalStyle } from '../../theme/styles';
 
-const HomeStyle = StyleSheet.create({
+/* Style of Login Page */
+const LoginStyle = StyleSheet.create({
     pageContainer: { 
         flex: 1,
         justifyContent: "center"
@@ -80,4 +81,4 @@ const HomeStyle = StyleSheet.create({
     }
 });
 
-export default HomeStyle;
+export default LoginStyle;
