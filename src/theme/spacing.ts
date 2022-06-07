@@ -67,3 +67,5 @@ export const margin: ViewStyle = {
 export const largeMargin: ViewStyle = {
   margin: MARGIN * 4,
 };
+
+export const borderRadius = 34;

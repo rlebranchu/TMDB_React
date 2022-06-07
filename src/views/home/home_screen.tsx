@@ -19,6 +19,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [listMovie, setListMovie] = useState<TMDBMovieBase[]>([]);
   const [search, setSearch] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const {state, setState} = useGlobalState();
 
   useEffect(() => {
@@ -27,25 +28,30 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   const _fetchMoviesBySearch = () => {
     setLoading(true);
-    fetchMovies(search).then((data: TMDBMovieList[]) => {
-      const listMovies: TMDBMovieBase[] = data.map((item: TMDBMovieList) : TMDBMovieBase => {
-        const movie : TMDBMovieBase = {
-          id: item.id,
-          title: item.title,
-          poster_path: item.poster_path,
-          vote_average: item.vote_average,
-          release_date: new Date(item.release_date)
-        };
-        return movie;
-      });
-      setListMovie(listMovies);
-      // set loading to false after movies are fetched.
-      setLoading(false);
+    fetchMovies(search).then((data: TMDBMovieList[] | undefined) => {
+      if(data){
+        const listMovies: TMDBMovieBase[] = data.map((item: TMDBMovieList) : TMDBMovieBase => {
+          const movie : TMDBMovieBase = {
+            id: item.id,
+            title: item.title,
+            poster_path: item.poster_path,
+            vote_average: item.vote_average,
+            release_date: new Date(item.release_date)
+          };
+          return movie;
+        });
+        setListMovie(listMovies);
+        // set loading to false after movies are fetched.
+        setLoading(false);
+        setError(false);
+      } else {
+        setError(true);
+      }
     });
   }
 
   const _onMoviePress = (movie: TMDBMovieBase) => {
-    navigation.navigate('MovieDetails', { movie: movie });
+    navigation.push('MovieDetails', { movie: movie });
   }
 
   const _onPressLogout = () => {

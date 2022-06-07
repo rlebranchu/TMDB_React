@@ -49,20 +49,21 @@ export const tryTMDBLogout = async (session_id: string) : Promise<boolean> => {
   return returnValue;
 }
 
-export const fetchMovies = async (search: string) : Promise<TMDBMovieList[]> => {
-  if (search.trim() == "") {
-    const response = await axios.get(`${URL}movie/popular?api_key=${API_KEY}`);
-    return [...response.data.results];
-  } else {
-    const response = await axios.get(
-      `${URL}search/movie?api_key=${API_KEY}&language=en-US&query=${search}`
-    );
-    return [...response.data.results];
-  }
+export const fetchMovies = async (search: string) : Promise<TMDBMovieList[] | undefined> => {
+  let returnValue = undefined;
+  const requestUrl = search.trim() == "" ? `${URL}movie/popular?api_key=${API_KEY}` : 
+    `${URL}search/movie?api_key=${API_KEY}&language=en-US&query=${search}`;
+
+  await axios.get(requestUrl)
+    .then(response => returnValue = [...response.data.results])
+    .catch(_ => returnValue = undefined);
+  
+  return returnValue;
 };
 
-export const fetchDatabyMovieID = async (id: string, session_id: string) : Promise<TMDBMovieData> => {
-  const [responseDetails, responseVideo, responseMovieState] = await Promise.all([
+export const fetchDatabyMovieID = async (id: string, session_id: string) : Promise<TMDBMovieData | undefined> => {
+  let returnValue = undefined;
+  await Promise.all([
     axios.get(
       `${URL}movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=backdrop_path,genres,homepage,overview,popularity,production_companies,revenue,status,vote_count`
     ),
@@ -72,26 +73,45 @@ export const fetchDatabyMovieID = async (id: string, session_id: string) : Promi
     axios.get(
       `${URL}movie/${id}/account_states?api_key=${API_KEY}&session_id=${session_id}`
     ),
-  ]);
-  const listVideosYoutube: Array<Video> = (responseVideo.data.results as Array<Video>).filter(v => v.site == "YouTube");
-  const videoKey = listVideosYoutube.length > 0 ? listVideosYoutube[0].key : "";
-  const dataMovie = {
-    ...responseDetails.data,
-    release_date: new Date(responseDetails.data.release_date),
-    video: videoKey,
-    favorite: responseMovieState.data.favorite
-  };
-  return dataMovie;
+    axios.get(
+      `${URL}movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`
+    ),
+  ]).then(response => {
+    const [responseDetails, responseVideo, responseMovieState, reponseSimilarMovies] = response;
+    const listVideosYoutube: Array<Video> = (responseVideo.data.results as Array<Video>).filter(v => v.site == "YouTube");
+    const videoKey = listVideosYoutube.length > 0 ? listVideosYoutube[0].key : "";
+    const dataMovie: TMDBMovieData = {
+      ...responseDetails.data,
+      release_date: new Date(responseDetails.data.release_date),
+      video: videoKey,
+      favorite: responseMovieState.data.favorite,
+      similarMovies: reponseSimilarMovies.data.results.map((movie: TMDBMovieList) => {
+        return {
+          id: movie.id,
+          title: movie.title,
+          poster_path: movie.poster_path,
+          vote_average: movie.vote_average,
+          release_date: movie.release_date
+        };
+      })
+    };
+    returnValue = dataMovie
+  }).catch(_ => {
+    returnValue = undefined;
+  });
+  return returnValue;
 };
 
-export const markFavoriteMovie = async (favorite: boolean, account_id: string, movie_id: string, session_id: string,) => {
-  const response = await axios.post(
+export const markFavoriteMovie = async (favorite: boolean, account_id: string, movie_id: string, session_id: string,) : Promise<boolean> => {
+  let returnValue : boolean = false;
+  await axios.post(
     `${URL}account/${account_id}/favorite?api_key=${API_KEY}&session_id=${session_id}`,
     {
       media_type: "movie",
       media_id: movie_id,
       favorite: favorite
     }
-  );
-  return [...response.data.results];
+  ).then(_ => returnValue = true )
+  .catch(_ => returnValue = false );
+  return returnValue;
 }

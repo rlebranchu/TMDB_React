@@ -54,7 +54,8 @@ type TMDBMovieData = TMDBMovieBase & {
     revenue: number,
     status: string, 
     video: string,
-    vote_count: number
+    vote_count: number,
+    similarMovies: TMDBMovieBase[]
 }
 
 type Video = {

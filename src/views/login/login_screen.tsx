@@ -29,7 +29,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         if(!isLoginError(response)){
             clearForm();
             setState(response);
-            navigation.navigate('Home');
+            navigation.push('Home');
         }
       });
   }
