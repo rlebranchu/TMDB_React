@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type TMDBToken = {
+    account_id: string,
     token: string,
     expires_at: Date,
     session_id: string
@@ -46,6 +47,7 @@ type TMDBMovieData = TMDBMovieBase & {
     backdrop_path: string,
     genres: MovieGenre[],
     homepage: string,
+    favorite: boolean,
     overview: string,
     popularity: number,
     production_companies: MovieProductor[],

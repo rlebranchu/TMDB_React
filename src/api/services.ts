@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useGlobalState } from '../../GlobalState';
 import {LoginError, TMDBMovieData, TMDBMovieList, TMDBToken, Video} from '../types/interfaces';
 
 import { URL, API_KEY } from './const';
@@ -20,6 +19,7 @@ export const tryTMDBLogin = async (username: string, password: string) : Promise
           `${URL}authentication/session/new?api_key=${API_KEY}&request_token=${responseToken.data.request_token}`
         ).then(responseSession => {
           const token : TMDBToken = {
+            account_id: username,
             token: responseToken.data.request_token,
             expires_at: responseToken.data.expires_at,
             session_id : responseSession.data.session_id,
@@ -36,7 +36,6 @@ export const tryTMDBLogin = async (username: string, password: string) : Promise
     });
     return returnValue;
 }
-
 
 export const tryTMDBLogout = async (session_id: string) : Promise<boolean> => {
   let returnValue : boolean = false;
@@ -63,7 +62,7 @@ export const fetchMovies = async (search: string) : Promise<TMDBMovieList[]> => 
 };
 
 export const fetchDatabyMovieID = async (id: string, session_id: string) : Promise<TMDBMovieData> => {
-  const [responseDetails, responseVideo] = await Promise.all([
+  const [responseDetails, responseVideo, responseMovieState] = await Promise.all([
     axios.get(
       `${URL}movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=backdrop_path,genres,homepage,overview,popularity,production_companies,revenue,status,vote_count`
     ),
@@ -80,6 +79,19 @@ export const fetchDatabyMovieID = async (id: string, session_id: string) : Promi
     ...responseDetails.data,
     release_date: new Date(responseDetails.data.release_date),
     video: videoKey,
+    favorite: responseMovieState.data.favorite
   };
   return dataMovie;
 };
+
+export const markFavoriteMovie = async (favorite: boolean, account_id: string, movie_id: string, session_id: string,) => {
+  const response = await axios.post(
+    `${URL}account/${account_id}/favorite?api_key=${API_KEY}&session_id=${session_id}`,
+    {
+      media_type: "movie",
+      media_id: movie_id,
+      favorite: favorite
+    }
+  );
+  return [...response.data.results];
+}

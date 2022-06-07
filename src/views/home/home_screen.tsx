@@ -50,7 +50,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   const _onPressLogout = () => {
     tryTMDBLogout(state.session_id!);
-    setState({token: '', expires_at: new Date(), session_id: '' });
+    setState({account_id: '', token: '', expires_at: new Date(), session_id: '' });
     navigation.goBack();
   }
 

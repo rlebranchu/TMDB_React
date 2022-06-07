@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { TMBD_IMAGE_URL } from "../../api/const";
 import "../../utils/date_utils";
-import { fetchDatabyMovieID } from "../../api/services";
+import { fetchDatabyMovieID, markFavoriteMovie } from "../../api/services";
 import Loading from "../../common/Loading/loading";
 import ProductionItem from "../../common/ProductionItem/production_item";
 import { MovieDetailsScreenProps, TMDBMovieData } from "../../types/interfaces";
@@ -36,6 +36,11 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
     navigation.goBack();
   }
 
+  const _onPressFavorite = () => {
+    markFavoriteMovie(!movie!.favorite, state.account_id!, movie!.id, state.session_id!);
+    setMovie({...movie!, favorite: !movie!.favorite });
+  }
+
   const _onPressYoutubeButton = () => {
     Linking.openURL("https://youtube.com/watch?v="+ movie!.video);
   }
@@ -52,9 +57,7 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
           resizeMode="cover" 
           style={MovieDetailsStyle.backdrop}>
             <View style={MovieDetailsStyle.headerContainer}>
-            <TouchableOpacity
-                style={MovieDetailsStyle.returnButton} onPress={_onPressReturn}
-              >
+              <TouchableOpacity style={MovieDetailsStyle.returnButton} onPress={_onPressReturn}>
                 <Image source={require('./../../../assets/left_icon.png')} style={MovieDetailsStyle.returnIcon} />
               </TouchableOpacity>
             </View>
@@ -73,7 +76,13 @@ const MovieDetailsScreen : React.FC<MovieDetailsScreenProps> = ({navigation, rou
                     </View>
                   </View>
                   <View style={MovieDetailsStyle.rightPopularityContainer}>
-                    <Image source={require('./../../../assets/star.png')} style={MovieDetailsStyle.starIcon} />
+                    <TouchableOpacity onPress={_onPressFavorite}>
+                      {movie.favorite ? 
+                        <Image source={require('./../../../assets/star.png')} style={MovieDetailsStyle.starIcon} />
+                        :
+                        <Image source={require('./../../../assets/star_empty.png')} style={MovieDetailsStyle.starIcon} />
+                      }
+                    </TouchableOpacity>
                     { movie.video != "" ?
                       <TouchableOpacity onPress={_onPressYoutubeButton}>
                         <Image source={require('./../../../assets/youtube.png')} style={MovieDetailsStyle.youtubeIcon} />
